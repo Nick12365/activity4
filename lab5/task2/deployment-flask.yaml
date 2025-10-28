@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend # must be the same value as the label in the template
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: frontend # this label is assigned to each pod in the set
+    spec:
+     containers:
+     - name: frontend
+       image: nickl12365/lab4frontendapp:latest
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend # must be the same value as the label in the template
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: backend # this label is assigned to each pod in the set
+    spec:
+     containers:
+     - name: backend
+       image: nickl12365/lad4backendapp:latest

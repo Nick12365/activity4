@@ -1,0 +1,24 @@
+apiVersion: v1 #the api server version
+
+kind: Pod #Always stars with a capital for the object. 
+
+metadata: 
+  name: nginx # Gives the pod a name.
+  labels:
+    app: nginx  #Services attach to labels via pods. You don't have to use "app" but thats the convention, labels are a key value pair. 
+spec: #Spec for the container inside the POD
+  containers:
+  -  name: nginx #Name of container
+     image: nginx:alpine # Image to use (defaults to docker hub)
+     ports:
+       - containerPort: 80 
+     resources:
+        requests: 
+          memory: "256Mi"
+          cpu: "250m"
+        limits:
+          memory: "512Mi"
+          cpu: "500m"
+  
+    
+
